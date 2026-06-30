@@ -1,0 +1,34 @@
+<script type="text/x-handlebars" data-template-name="stonehearthLoadingScreen">
+   <div id="loadingScreen">
+      <div id="frameDecor">
+         <div class="corner top left"></div>
+         <div class="corner top right"></div>
+         <div class="corner bottom left"></div>
+         <div class="corner bottom right"></div>
+      </div>
+
+      <div id="scene">
+         <div id="hero"></div>
+         <div id="prop"></div>
+      </div>
+
+      <div id="infoPanel">
+         <div id="titleFrame">
+            <h1 id="title">MAGMASMITH</h1>
+         </div>
+         <div id="descriptionFrame">
+            <div id="description">
+               Tempering ore, shaping steel, and keeping the heartfire awake through the longest nights.
+            </div>
+         </div>
+      </div>
+
+      <div id="controls">
+         <div id="frame"></div>
+         <div id="progressbar"></div>
+         <div id="message">{{i18n stonehearth:ui.shell.loading_screen.initial_load_map_text}}</div>
+      </div>
+
+      <div id="tip">{{view.tips}}</div>
+   </div>
+</script>

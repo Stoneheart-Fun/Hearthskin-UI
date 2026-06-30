@@ -1,0 +1,274 @@
+@font-face {
+   font-family: 'AutourOne';
+   src: url('/hearthskin-ui/ui/shell/loading_screen/fonts/autourone-ru/AutourOne-Regular-Ru.woff');
+}
+
+@font-face {
+   font-family: 'GroboldRu';
+   src: url('/hearthskin-ui/ui/shell/loading_screen/fonts/grobold/grobold-webfont.woff');
+}
+
+@font-face {
+   font-family: 'OfelixGro';
+   src: url('/hearthskin-ui/ui/shell/loading_screen/fonts/ofelixgro/ofelixgro.woff');
+}
+
+#loadingScreen {
+   position: absolute;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   overflow: hidden;
+   background:
+      linear-gradient(rgba(33, 24, 14, 0.28), rgba(33, 24, 14, 0.28)),
+      url('/hearthskin-ui/ui/shell/loading_screen/images/bg.png') center center / cover no-repeat;
+   color: #f7f0dc;
+   font-family: 'AutourOne', serif;
+}
+
+#frameDecor {
+   position: absolute;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   pointer-events: none;
+   z-index: 5;
+
+   .corner {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background-image: url('/hearthskin-ui/ui/shell/loading_screen/images/border.png');
+      background-repeat: no-repeat;
+   }
+
+   .top {
+      top: 20px;
+   }
+
+   .bottom {
+      bottom: 20px;
+   }
+
+   .left {
+      left: 20px;
+   }
+
+   .right {
+      right: 20px;
+   }
+
+   .top.left {
+      background-position: top left;
+   }
+
+   .top.right {
+      background-position: top right;
+   }
+
+   .bottom.left {
+      background-position: bottom left;
+   }
+
+   .bottom.right {
+      background-position: bottom right;
+   }
+}
+
+#scene {
+   position: absolute;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   z-index: 1;
+}
+
+#hero {
+   position: absolute;
+   left: 5%;
+   top: 50%;
+   width: 46vw;
+   height: 76vh;
+   min-width: 480px;
+   min-height: 520px;
+   transform: translateY(-46%);
+   background: url('/hearthskin-ui/ui/shell/loading_screen/images/bg2.png') left center / contain no-repeat;
+   filter: drop-shadow(0 18px 18px rgba(0, 0, 0, 0.28));
+}
+
+#prop {
+   position: absolute;
+   left: 29%;
+   top: 59%;
+   width: 15vw;
+   height: 28vh;
+   min-width: 140px;
+   min-height: 180px;
+   background: url('/hearthskin-ui/ui/shell/loading_screen/images/bg3.png') center center / contain no-repeat;
+   filter: drop-shadow(0 18px 18px rgba(0, 0, 0, 0.25));
+}
+
+#infoPanel {
+   position: absolute;
+   top: 17%;
+   right: 8%;
+   width: 35vw;
+   max-width: 680px;
+   min-width: 420px;
+   z-index: 3;
+}
+
+#titleFrame {
+   min-height: 112px;
+   padding: 26px 22px 34px;
+   background: url('/hearthskin-ui/ui/shell/loading_screen/images/crafter_shingle.png') center center / 100% 100% no-repeat;
+}
+
+#title {
+   margin: 0;
+   text-align: center;
+   color: #ffb93a;
+   font: 46px 'OfelixGro', sans-serif;
+   letter-spacing: 1px;
+   text-shadow: 0 3px 0 rgba(73, 35, 10, 0.35);
+}
+
+#descriptionFrame {
+   margin-top: 18px;
+   min-height: 350px;
+   padding: 74px 58px 66px;
+   background: url('/hearthskin-ui/ui/shell/loading_screen/images/scroll_bg.png') center center / 100% 100% no-repeat;
+   box-sizing: border-box;
+}
+
+#description {
+   color: #2d2a24;
+   font-size: 26px;
+   line-height: 1.45;
+   text-align: center;
+}
+
+#controls {
+   position: absolute;
+   left: 50%;
+   bottom: 11%;
+   width: 394px;
+   height: 93px;
+   transform: translateX(-50%);
+   z-index: 4;
+}
+
+#frame {
+   position: absolute;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   background: url('/hearthskin-ui/ui/shell/loading_screen/images/progress_frame.png') center center / contain no-repeat;
+}
+
+#progressbar {
+   position: absolute;
+   top: 13px;
+   left: 14px;
+   width: 365px;
+   height: 47px;
+}
+
+#message {
+   position: absolute;
+   top: 17px;
+   left: 34px;
+   right: 34px;
+   color: #fff8eb;
+   font: 24px 'AutourOne', serif;
+   text-align: center;
+   text-shadow:
+      -2px -2px 0 #1b1b1b,
+      2px -2px 0 #1b1b1b,
+      -2px 2px 0 #1b1b1b,
+      2px 2px 0 #1b1b1b;
+   z-index: 2;
+}
+
+.ui-progressbar {
+   height: 20px;
+   text-align: left;
+   overflow: hidden;
+   background: none;
+   border: 0;
+}
+
+.ui-progressbar .ui-progressbar-value {
+   position: absolute;
+   margin: 0;
+   height: 35px;
+   border-width: 5px 5px 10px 5px;
+   border-image: url(/stonehearth/ui/root/css/images/progressbar/meter.png) 5 5 10 5 repeat;
+   border-style: solid;
+}
+
+.ui-progressbar-indeterminate .ui-progressbar-value {
+   background-image: none;
+}
+
+#tip {
+   position: absolute;
+   left: 50%;
+   bottom: 34px;
+   width: 74vw;
+   max-width: 1200px;
+   transform: translateX(-50%);
+   color: #fff6e5;
+   font-size: 18px;
+   line-height: 1.35;
+   text-align: center;
+   text-shadow:
+      -2px -2px 0 rgba(27, 21, 16, 0.95),
+      2px -2px 0 rgba(27, 21, 16, 0.95),
+      -2px 2px 0 rgba(27, 21, 16, 0.95),
+      2px 2px 0 rgba(27, 21, 16, 0.95);
+   z-index: 4;
+}
+
+@media (max-width: 1500px) {
+   #hero {
+      left: 2%;
+      width: 50vw;
+   }
+
+   #infoPanel {
+      right: 5%;
+      width: min(39vw, 620px);
+   }
+}
+
+@media (max-width: 1100px) {
+   #hero {
+      left: -8%;
+      width: 58vw;
+      min-width: 380px;
+   }
+
+   #prop {
+      left: 36%;
+      top: 60%;
+   }
+
+   #infoPanel {
+      top: 13%;
+      right: 4%;
+      min-width: 360px;
+   }
+
+   #title {
+      font-size: 38px;
+   }
+
+   #description {
+      font-size: 22px;
+   }
+}
