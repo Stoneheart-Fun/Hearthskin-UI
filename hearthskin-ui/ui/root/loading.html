@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8">
+   <title>Hearthskin Loading UI</title>
+   <link rel="stylesheet" type="text/css" href="/stonehearth/ui/root/css/jqueryui.css" />
+
+   <script src="/radiant/js/external/underscore-1.5.2.js"></script>
+   <script src="/radiant/js/external/jquery-2.1.4.min.js"></script>
+   <script src="/radiant/js/external/simple_class.js"></script>
+   <script src="/radiant/js/radiant/core.js"></script>
+   <script src="/radiant/js/radiant/object.js"></script>
+   <script src="/radiant/js/radiant/trace.js"></script>
+   <script src="/radiant/js/radiant/radiant_console.js"></script>
+
+   <script src="js/libs/jquery-ui-1.10.3.js"></script>
+   <script src="js/libs/i18next-1.10.1.js"></script>
+   <script src="/radiant/js/radiant/standalone_page.js"></script>
+
+   <style>
+      @font-face {
+         font-family: 'AutourOne';
+         src: url('/hearthskin-ui/ui/shell/loading_screen/fonts/autourone-ru/AutourOne-Regular-Ru.woff');
+      }
+
+      @font-face {
+         font-family: 'OfelixGro';
+         src: url('/hearthskin-ui/ui/shell/loading_screen/fonts/ofelixgro/ofelixgro.woff');
+      }
+
+      html, body {
+         margin: 0;
+         padding: 0;
+         width: 100%;
+         height: 100%;
+         overflow: hidden;
+         background: #1c140d;
+      }
+
+      #loadingScreen {
+         position: absolute;
+         top: 0;
+         left: 0;
+         right: 0;
+         bottom: 0;
+         overflow: hidden;
+         color: #fff;
+         background-color: #1c140d;
+         background-image: url('/hearthskin-ui/ui/shell/loading_screen/images/bg.png');
+         background-position: center center;
+         background-repeat: no-repeat;
+         background-size: cover;
+      }
+
+      .corner {
+         position: absolute;
+         width: 40px;
+         height: 40px;
+         background-image: url('/hearthskin-ui/ui/shell/loading_screen/images/border.png');
+         background-repeat: no-repeat;
+         z-index: 3;
+      }
+
+      .top-left {
+         top: 20px;
+         left: 20px;
+         background-position: top left;
+      }
+
+      .top-right {
+         top: 20px;
+         right: 20px;
+         background-position: top right;
+      }
+
+      .bottom-left {
+         bottom: 20px;
+         left: 20px;
+         background-position: bottom left;
+      }
+
+      .bottom-right {
+         bottom: 20px;
+         right: 20px;
+         background-position: bottom right;
+      }
+
+      #hero {
+         position: absolute;
+         left: 5%;
+         top: 50%;
+         width: 46%;
+         height: 76%;
+         min-width: 480px;
+         min-height: 520px;
+         margin-top: -23%;
+         background-image: url('/hearthskin-ui/ui/shell/loading_screen/images/bg2.png');
+         background-position: left center;
+         background-repeat: no-repeat;
+         background-size: contain;
+         z-index: 1;
+      }
+
+      #prop {
+         position: absolute;
+         left: 29%;
+         top: 59%;
+         width: 15%;
+         height: 28%;
+         min-width: 140px;
+         min-height: 180px;
+         background-image: url('/hearthskin-ui/ui/shell/loading_screen/images/bg3.png');
+         background-position: center center;
+         background-repeat: no-repeat;
+         background-size: contain;
+         z-index: 1;
+      }
+
+      #infoPanel {
+         position: absolute;
+         top: 17%;
+         right: 8%;
+         width: 35%;
+         max-width: 680px;
+         min-width: 420px;
+         z-index: 2;
+      }
+
+      #titleFrame {
+         min-height: 112px;
+         padding: 26px 22px 34px;
+         background-image: url('/hearthskin-ui/ui/shell/loading_screen/images/crafter_shingle.png');
+         background-position: center center;
+         background-repeat: no-repeat;
+         background-size: 100% 100%;
+      }
+
+      #title {
+         margin: 0;
+         color: #ffb93a;
+         text-align: center;
+         font-family: 'OfelixGro', sans-serif;
+         font-size: 46px;
+         letter-spacing: 1px;
+         text-shadow: 0 3px 0 rgba(73, 35, 10, 0.35);
+      }
+
+      #descriptionFrame {
+         margin-top: 18px;
+         min-height: 350px;
+         padding: 74px 58px 66px;
+         box-sizing: border-box;
+         background-image: url('/hearthskin-ui/ui/shell/loading_screen/images/scroll_bg.png');
+         background-position: center center;
+         background-repeat: no-repeat;
+         background-size: 100% 100%;
+      }
+
+      #description {
+         color: #2d2a24;
+         font-family: 'AutourOne', serif;
+         font-size: 26px;
+         line-height: 1.45;
+         text-align: center;
+      }
+
+      #controls {
+         position: absolute;
+         left: 50%;
+         bottom: 11%;
+         width: 409px;
+         height: 93px;
+         margin-left: -204px;
+         z-index: 4;
+      }
+
+      #frame {
+         position: absolute;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background-image: url('/hearthskin-ui/ui/shell/loading_screen/images/progress_frame.png');
+         background-repeat: no-repeat;
+      }
+
+      #message {
+         position: absolute;
+         top: 18px;
+         left: 34px;
+         right: 34px;
+         color: #fff8eb;
+         font-family: 'AutourOne', serif;
+         font-size: 24px;
+         text-align: center;
+         text-shadow: -2px -2px 0 #1b1b1b, 2px -2px 0 #1b1b1b, -2px 2px 0 #1b1b1b, 2px 2px 0 #1b1b1b;
+         z-index: 2;
+      }
+
+      #progressbar {
+         position: absolute;
+         top: 11px;
+         left: 15px;
+         width: 380px;
+         height: 50px;
+      }
+
+      .ui-progressbar {
+         height: 20px;
+         text-align: left;
+         overflow: hidden;
+         background: none;
+      }
+
+      .ui-progressbar .ui-progressbar-value {
+         position: absolute;
+         margin: 0;
+         height: 35px;
+         background: #3c51bc;
+         border-width: 5px 5px 10px 5px;
+         border-image: url(/stonehearth/ui/root/css/images/progressbar/meter.png) 5 5 10 5 repeat;
+         border-style: solid;
+      }
+
+      #tip {
+         position: absolute;
+         left: 50%;
+         bottom: 34px;
+         width: 74%;
+         max-width: 1200px;
+         margin-left: -37%;
+         color: #fff6e5;
+         font-family: 'AutourOne', serif;
+         font-size: 18px;
+         line-height: 1.35;
+         text-align: center;
+         text-shadow: -2px -2px 0 rgba(27, 21, 16, 0.95), 2px -2px 0 rgba(27, 21, 16, 0.95), -2px 2px 0 rgba(27, 21, 16, 0.95), 2px 2px 0 rgba(27, 21, 16, 0.95);
+         z-index: 4;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="loadingScreen">
+      <div class="corner top-left"></div>
+      <div class="corner top-right"></div>
+      <div class="corner bottom-left"></div>
+      <div class="corner bottom-right"></div>
+
+      <div id="hero"></div>
+      <div id="prop"></div>
+
+      <div id="infoPanel">
+         <div id="titleFrame">
+            <h1 id="title">MAGMASMITH</h1>
+         </div>
+         <div id="descriptionFrame">
+            <div id="description">
+               Tempering ore, shaping steel, and keeping the heartfire awake through the longest nights.
+            </div>
+         </div>
+      </div>
+
+      <div id="controls">
+         <div id="frame"></div>
+         <div id="progressbar"></div>
+         <div id="message"></div>
+      </div>
+
+      <div id="tip"></div>
+   </div>
+
+   <script>
+      var self = this;
+      var loadedProgress = 0;
+      var displayedLoadedProgress = 0;
+
+      self._progressbar = $("#progressbar");
+      self._progressbar.progressbar({
+         value: 0
+      });
+
+      var updateLoadingTextTick = 1;
+      var loadingText = null;
+      var tipOfDay = null;
+      var ticksAt100 = 0;
+      var ticksSpentLoading = 0;
+
+      var updateProgressBarVisuals = function() {
+         if (finishedLoading) {
+            if (displayedLoadedProgress > 97) {
+               displayedLoadedProgress = 97;
+            }
+         } else {
+            if (displayedLoadedProgress > 90) {
+               displayedLoadedProgress = 90;
+            }
+         }
+         self._progressbar.progressbar("option", "value", displayedLoadedProgress);
+      };
+
+      var finishedLoading = false;
+      radiant.call('radiant:get_load_progress_deferred')
+         .progress(function(o) {
+            loadedProgress = o.progress;
+            if (loadedProgress > 99) {
+               displayedLoadedProgress = 90;
+               finishedLoading = true;
+            } else if (loadedProgress > displayedLoadedProgress) {
+               displayedLoadedProgress = loadedProgress;
+               updateProgressBarVisuals();
+            }
+         });
+
+      var MAX_TICKS_SPENT_LOADING = 50;
+      var TICKS_WARM_UP_MULTIPLIER = 0.7;
+
+      self._intervalTicket = setInterval(function() {
+         if (!loadingText) {
+            loadingText = i18n.t('stonehearth:ui.shell.loading_screen.initial_load_game_text');
+            self.$('#message').html(loadingText);
+         }
+
+         if (!tipOfDay) {
+            var tips = i18n.t('stonehearth:ui.shell.loading_screen.tips', { returnObjectTrees: true });
+            var tipKeys = Object.keys(tips);
+            var tipRandom = Math.floor(Math.random() * tipKeys.length);
+            tipOfDay = tips[tipKeys[tipRandom]];
+            self.$('#tip').html(tipOfDay);
+         }
+
+         if (finishedLoading) {
+            ticksAt100++;
+         } else if (ticksSpentLoading < MAX_TICKS_SPENT_LOADING) {
+            ticksSpentLoading++;
+         }
+
+         if (displayedLoadedProgress < (loadedProgress + 25)) {
+            displayedLoadedProgress++;
+         }
+         updateProgressBarVisuals();
+
+         updateLoadingTextTick++;
+         if (updateLoadingTextTick >= 5) {
+            var flavorTexts = i18n.t('stonehearth:ui.shell.loading_screen.loading_map_flavor_text', { returnObjectTrees: true });
+            var flavorKeys = Object.keys(flavorTexts);
+            var flavorRandom = Math.floor(Math.random() * flavorKeys.length);
+            loadingText = flavorTexts[flavorKeys[flavorRandom]];
+            self.$('#message').html(loadingText);
+            updateLoadingTextTick = 0;
+         }
+
+         if (ticksAt100 > (ticksSpentLoading * TICKS_WARM_UP_MULTIPLIER)) {
+            displayedLoadedProgress = 100;
+            updateProgressBarVisuals();
+            radiant.call('radiant:reload_browser');
+         }
+      }, 1000);
+   </script>
+</body>
+</html>

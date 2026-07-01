@@ -9,6 +9,7 @@
     "stonehearth"
   ],
   "overrides": {
+    "stonehearth/ui/root/loading.html": "file(ui/root/loading.html)",
     "stonehearth/ui/shell/loading_screen/loading_screen.html": "file(ui/shell/loading_screen/loading_screen.html)",
     "stonehearth/ui/shell/loading_screen/loading_screen.js": "file(ui/shell/loading_screen/loading_screen.js)",
     "stonehearth/ui/shell/loading_screen/loading_screen.less": "file(ui/shell/loading_screen/loading_screen.less)"
