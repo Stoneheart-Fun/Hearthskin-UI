@@ -149,6 +149,7 @@
          align-items: center;
          justify-content: center;
          height: 100%;
+         overflow: hidden;
       }
 
       #controls {
@@ -211,21 +212,6 @@
          border-style: solid;
       }
 
-      #tip {
-         position: absolute;
-         left: 0;
-         right: 0;
-         bottom: 40px;
-         margin-left: 300px;
-         margin-right: 300px;
-         color: #fff6e5;
-         font-family: 'AutourOne', serif;
-         font-size: 18px;
-         line-height: 1.35;
-         text-align: center;
-         text-shadow: -2px -2px 0 rgba(27, 21, 16, 0.95), 2px -2px 0 rgba(27, 21, 16, 0.95), -2px 2px 0 rgba(27, 21, 16, 0.95), 2px 2px 0 rgba(27, 21, 16, 0.95);
-         z-index: 4;
-      }
    </style>
 </head>
 
@@ -244,7 +230,7 @@
          </div>
          <div id="descriptionFrame">
             <div id="description">
-               Tempering ore, shaping steel, and keeping the heartfire awake through the longest nights.
+               Preparing the forge for another long night.
             </div>
          </div>
       </div>
@@ -254,8 +240,6 @@
          <div id="progressbar"></div>
          <div id="message"></div>
       </div>
-
-      <div id="tip"></div>
    </div>
 
    <script>
@@ -314,7 +298,7 @@
             var tipKeys = Object.keys(tips);
             var tipRandom = Math.floor(Math.random() * tipKeys.length);
             tipOfDay = tips[tipKeys[tipRandom]];
-            self.$('#tip').html(tipOfDay);
+            self.$('#description').html(tipOfDay);
          }
 
          if (finishedLoading) {
